@@ -189,25 +189,6 @@ input {
   box-shadow: 0 1px 4px rgba(0,0,0,0.15);
 }
 
-/* Nút đổi tốc độ đọc mẫu */
-.speed-toggle-btn {
-  background: #ffffff;
-  border: 1px solid #dcd4c8;
-  padding: 5px 9px;
-  border-radius: var(--radius-full);
-  font-size: calc(12px * var(--scale));
-  font-weight: 800;
-  color: var(--primary-dark);
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-}
-
-.speed-toggle-btn:active {
-  background: var(--primary-light);
-}
-
 /* ==========================================================================
    2. MAIN WRAPPER (Khu vực cuộn nội dung, chừa khoảng cách cho thanh đáy)
    ========================================================================== */
@@ -687,28 +668,6 @@ input {
   border-radius: var(--radius-xs);
 }
 
-/* Nút bấm nghe đọc to rõ trên điện thoại */
-.speak-line-btn {
-  background: #ffffff;
-  border: 1.5px solid var(--primary);
-  color: var(--primary-dark);
-  padding: 6px 14px;
-  border-radius: var(--radius-full);
-  font-size: calc(13px * var(--scale));
-  font-weight: 800;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  box-shadow: 0 2px 6px rgba(180, 83, 9, 0.12);
-  transition: all var(--tap-duration);
-}
-
-.speak-line-btn:active {
-  background: var(--primary);
-  color: #ffffff;
-  transform: scale(0.94);
-}
-
 /* Lời tiếng Anh to bản, rõ nét */
 .lyric-english {
   font-size: calc(20px * var(--scale));
@@ -1108,28 +1067,7 @@ input {
 }
 
 /* ==========================================================================
-   9. QUICK SPEAK FLOATING PILL
-   ========================================================================== */
-.floating-speak-pill {
-  position: fixed;
-  bottom: calc(76px + env(safe-area-inset-bottom, 14px));
-  right: 16px;
-  background: var(--primary-dark);
-  color: #ffffff;
-  padding: 8px 16px;
-  border-radius: var(--radius-full);
-  box-shadow: var(--shadow-float);
-  font-size: calc(13px * var(--scale));
-  font-weight: 800;
-  z-index: 950;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  animation: slideFadeIn 0.2s ease-out;
-}
-
-/* ==========================================================================
-   10. TABLET & DESKTOP ENHANCEMENTS (Màn hình lớn tự động mở rộng)
+   9. TABLET & DESKTOP ENHANCEMENTS (Màn hình lớn tự động mở rộng)
    ========================================================================== */
 @media (min-width: 640px) {
   .recorder-touch-controls {

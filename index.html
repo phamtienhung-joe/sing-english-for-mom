@@ -27,17 +27,13 @@
         </div>
       </div>
 
-      <!-- Quick Accessibility Controls (Chỉnh cỡ chữ & Tốc độ đọc trực tiếp) -->
+      <!-- Quick Accessibility Controls (Chỉnh cỡ chữ to cho Mẹ) -->
       <div class="quick-controls">
         <div class="segmented-control font-control" title="Chỉnh chữ to cho Mẹ">
           <button id="btn-font-normal" class="seg-btn active" onclick="setFontSize('normal')">A</button>
           <button id="btn-font-large" class="seg-btn" onclick="setFontSize('large')">A+</button>
           <button id="btn-font-xlarge" class="seg-btn" onclick="setFontSize('xlarge')">A++</button>
         </div>
-
-        <button id="btn-speed-toggle" class="speed-toggle-btn" onclick="toggleSpeechSpeed()" title="Đổi tốc độ đọc mẫu">
-          <span id="speed-label">1.0x</span>
-        </button>
       </div>
     </div>
   </header>
@@ -107,7 +103,7 @@
         <div class="mobile-guide-banner">
           <span class="guide-icon">💡</span>
           <div class="guide-text">
-            Bấm nút <strong>🔊 Nghe</strong> ở mỗi câu để nghe máy đọc chuẩn. Dòng <em>màu cam</em> là phiên âm trợ âm giúp Mẹ bắt nhịp nối âm dễ dàng!
+            Dòng <em>màu cam</em> là phiên âm trợ âm tiếng Việt giúp Mẹ phát âm chuẩn và bắt nhịp nối âm luyến láy dễ dàng!
           </div>
         </div>
 
@@ -240,11 +236,6 @@
       <span class="tab-label">Ghi Âm</span>
     </button>
   </nav>
-
-  <!-- FLOATING QUICK SPEAK PILL (Bôi đen từ bất kỳ để nghe đọc) -->
-  <div id="quick-speak-pill" class="floating-speak-pill" style="display:none;" onclick="speakSelectedText()">
-    <span>🔊</span> Nghe phát âm
-  </div>
 
   <!-- SCRIPT FILES -->
   <script src="songs-data.js"></script>

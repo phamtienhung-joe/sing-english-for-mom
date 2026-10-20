@@ -1,7 +1,7 @@
 /**
  * HỌC HÁT TIẾNG ANH CÙNG MẸ - APP JAVASCRIPT (MOBILE-FIRST)
  * Xử lý tương tác mượt mà trên iPhone & Android (Samsung),
- * phát âm giọng bản xứ, thu âm giọng hát và hiển thị bài học.
+ * thu âm giọng hát và hiển thị bài học ca từ song ngữ.
  */
 
 // STATE QUẢN LÝ ỨNG DỤNG
@@ -10,7 +10,6 @@ const appState = {
   currentCategory: 'all',
   searchQuery: '',
   fontSize: 'normal',
-  speechRate: 1.0,
   activeNav: 'library',
   activeSongTab: 'lyrics',
   isRecording: false,
@@ -26,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderSongLibrary();
   renderCurrentSong();
   renderGeneralGrammar();
-  setupTextSelectionHelper();
 });
 
 /* ==========================================================================
@@ -36,13 +34,6 @@ function loadSavedSettings() {
   const savedFontSize = localStorage.getItem('singMom_fontSize');
   if (savedFontSize) {
     setFontSize(savedFontSize, false);
-  }
-
-  const savedSpeed = localStorage.getItem('singMom_speechSpeed');
-  if (savedSpeed) {
-    setSpeechSpeed(parseFloat(savedSpeed), false);
-  } else {
-    updateSpeedButtonDisplay();
   }
 
   const savedSongId = localStorage.getItem('singMom_lastSongId');
@@ -66,27 +57,6 @@ function setFontSize(size, save = true) {
 
   if (save) {
     localStorage.setItem('singMom_fontSize', size);
-  }
-}
-
-// Chỉnh tốc độ phát âm mẫu (toggle 0.75x <-> 1.0x)
-function toggleSpeechSpeed() {
-  const newSpeed = appState.speechRate === 1.0 ? 0.75 : 1.0;
-  setSpeechSpeed(newSpeed, true);
-}
-
-function setSpeechSpeed(speed, save = true) {
-  appState.speechRate = speed;
-  updateSpeedButtonDisplay();
-  if (save) {
-    localStorage.setItem('singMom_speechSpeed', speed.toString());
-  }
-}
-
-function updateSpeedButtonDisplay() {
-  const label = document.getElementById('speed-label');
-  if (label) {
-    label.textContent = appState.speechRate === 0.75 ? '0.75x Chậm' : '1.0x Chuẩn';
   }
 }
 
@@ -119,63 +89,7 @@ function switchSongTab(tabKey) {
 }
 
 /* ==========================================================================
-   3. PHÁT ÂM TIẾNG ANH BẢN XỨ (WEB SPEECH SYNTHESIS)
-   ========================================================================== */
-function speakText(text) {
-  if (!('speechSynthesis' in window)) {
-    alert('Trình duyệt chưa hỗ trợ tính năng phát âm. Mẹ vui lòng mở trang trên Google Chrome hoặc Safari nhé!');
-    return;
-  }
-
-  // Dừng âm thanh đang phát trước đó nếu có
-  window.speechSynthesis.cancel();
-
-  // Làm sạch chuỗi trước khi đọc
-  const cleanText = text.replace(/[/\\#,+()$~%.'":*?<>{}]/g, ' ').trim();
-  const utterance = new SpeechSynthesisUtterance(cleanText);
-
-  utterance.lang = 'en-US';
-  utterance.rate = appState.speechRate;
-  utterance.pitch = 1.0;
-
-  // Ưu tiên chọn giọng đọc tiếng Anh tự nhiên
-  const voices = window.speechSynthesis.getVoices();
-  const preferredVoice = voices.find(v =>
-    (v.lang === 'en-US' || v.lang === 'en_US') &&
-    (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Samantha') || v.name.includes('Karen'))
-  );
-  if (preferredVoice) {
-    utterance.voice = preferredVoice;
-  }
-
-  window.speechSynthesis.speak(utterance);
-}
-
-// Bôi đen từ bất kỳ trên màn hình để nghe đọc riêng từ đó
-function setupTextSelectionHelper() {
-  const quickPill = document.getElementById('quick-speak-pill');
-
-  document.addEventListener('selectionchange', () => {
-    const selection = window.getSelection().toString().trim();
-    if (selection.length > 1 && selection.length < 60 && /^[a-zA-Z\s'-]+$/.test(selection)) {
-      quickPill.style.display = 'flex';
-      quickPill.dataset.text = selection;
-    } else {
-      quickPill.style.display = 'none';
-    }
-  });
-}
-
-function speakSelectedText() {
-  const quickPill = document.getElementById('quick-speak-pill');
-  const text = quickPill.dataset.text;
-  if (text) {
-    speakText(text);
-  }
-}
-
-/* ==========================================================================
-   4. RENDER THƯ VIỆN BÀI HÁT (SONG LIBRARY)
+   3. RENDER THƯ VIỆN BÀI HÁT (SONG LIBRARY)
    ========================================================================== */
 function renderSongLibrary() {
   const grid = document.getElementById('songs-grid');
@@ -250,7 +164,7 @@ function resetSearch() {
 }
 
 /* ==========================================================================
-   5. RENDER BÀI HÁT CHI TIẾT (SONG STUDIO)
+   4. RENDER BÀI HÁT CHI TIẾT (SONG STUDIO)
    ========================================================================== */
 function selectAndPracticeSong(songId) {
   appState.currentSongId = songId;
@@ -301,9 +215,6 @@ function renderCurrentSong() {
       <div class="lyric-card" id="lyric-line-${index}">
         <div class="lyric-top-bar">
           <span class="line-number">Câu ${index + 1}</span>
-          <button class="speak-line-btn" onclick="speakLine(${index}, '${escapeSingleQuotes(line.en)}')">
-            <span>🔊</span> Nghe Đọc
-          </button>
         </div>
 
         <!-- Lời tiếng Anh -->
@@ -402,21 +313,8 @@ function toggleYouTubeVideo() {
   }
 }
 
-function speakLine(lineIndex, text) {
-  // Highlight dòng đang phát
-  document.querySelectorAll('.lyric-card').forEach(c => c.classList.remove('highlighted'));
-  const card = document.getElementById(`lyric-line-${lineIndex}`);
-  if (card) card.classList.add('highlighted');
-
-  speakText(text);
-}
-
-function escapeSingleQuotes(str) {
-  return str.replace(/'/g, "\\'");
-}
-
 /* ==========================================================================
-   6. RENDER CẨM NANG NGỮ PHÁP CHUNG (GRAMMAR HUB)
+   5. RENDER CẨM NANG NGỮ PHÁP CHUNG (GRAMMAR HUB)
    ========================================================================== */
 function renderGeneralGrammar() {
   const container = document.getElementById('general-grammar-container');
@@ -449,7 +347,7 @@ function renderGeneralGrammar() {
 }
 
 /* ==========================================================================
-   7. PHÒNG THU ÂM MOBILE (VOICE RECORDER)
+   6. PHÒNG THU ÂM MOBILE (VOICE RECORDER)
    ========================================================================== */
 async function startRecording() {
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {

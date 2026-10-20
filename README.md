@@ -1,32 +1,30 @@
 # 🌸 Hát Tiếng Anh Cùng Mẹ (Sing English for Mom)
 
-> **Trang web học tiếng Anh qua bài hát thiết kế riêng cho Mẹ:** Lời ca song ngữ Anh - Việt, phiên âm trợ âm tiếng Việt dễ hát, bí quyết nối âm luyến láy, giải thích ngữ pháp bài hát gần gũi, kèm công cụ phát âm giọng bản xứ và phòng thu âm giọng hát của Mẹ.
+> **Trang web học tiếng Anh qua bài hát thiết kế riêng cho Mẹ:** Lời ca song ngữ Anh - Việt, phiên âm trợ âm tiếng Việt dễ hát, bí quyết nối âm luyến láy, giải thích ngữ pháp bài hát gần gũi, kèm MV ca sĩ hát mẫu và phòng thu âm giọng hát của Mẹ.
 
 ---
 
 ## 🌟 Tính Năng Nổi Bật Dành Riêng Cho Mẹ
 
 1. **Phiên Âm Trợ Âm Tiếng Việt (Singing Phonetic Helper):**
-   - Bên cạnh phiên âm quốc tế IPA, mỗi câu hát đều có dòng phiên âm tiếng Việt dễ đọc (Ví dụ: *"Such a feelin's"* ➔ *"Sắt-chờ phi-linh-z"*).
+   - Bên cạnh phiên âm quốc tế IPA, mỗi câu hát đều có dòng phiên âm tiếng Việt chuẩn hóa dễ đọc (Ví dụ: *"Such a feelin's"* ➔ *"Sắt-chờ phi-linh-z"*).
    - Đánh dấu cụ thể các vị trí **nối âm (linking)** giúp Mẹ hát liền mạch và không bị vấp.
 
-2. **Nghe Phát Âm Từng Câu & Từng Từ (Speech Pronunciation):**
-   - Tích hợp công nghệ Web Speech API bản xứ: Bấm nút **🔊 Nghe Đọc Mẫu** ở từng câu để nghe giọng chuẩn trước khi hát.
-   - Có thể bôi đen bất kỳ từ tiếng Anh nào trên màn hình để nghe phát âm riêng từ đó.
-   - Có chế độ chỉnh tốc độ đọc chậm **0.75x** hoặc chuẩn **1.0x**.
+2. **MV Ca Sĩ Hát Mẫu Chuẩn Từ YouTube:**
+   - Mỗi bài hát đều tích hợp sẵn MV chính thức từ ca sĩ gốc để Mẹ vừa nghe giai điệu thực tế, vừa ngân nga theo nhịp bài hát.
 
 3. **Cẩm Nang Ngữ Pháp Lời Bài Hát (Bilingual Grammar Insights):**
    - Phân tích trực tiếp các cấu trúc ngữ pháp có trong bài (*Present Simple, Past Simple, Can't help + V-ing, Used to, Câu điều kiện...*).
    - Giải thích ấm áp bằng tiếng Việt, giúp Mẹ hiểu sâu sắc cảm xúc của bài hát thay vì học vẹt.
 
 4. **Phòng Thu Âm Của Mẹ (Voice Practice Studio):**
-   - Mẹ có thể bấm nút **🔴 Ghi Âm** để tự tin cất giọng hát thử, sau đó bấm **▶️ Nghe Lại** để cảm nhận sự tiến bộ mỗi ngày.
+   - Mẹ có thể bấm nút **🔴 Bắt đầu thu** để tự tin cất giọng hát thử, sau đó bấm **▶️ Nghe lại** để cảm nhận sự tiến bộ mỗi ngày.
    - Hoàn toàn riêng tư, giọng thu được lưu trực tiếp trên thiết bị của Mẹ, không gửi đi bất kỳ đâu.
 
-5. **Giao Diện Thân Thiện & Chữ To Rõ Ràng:**
+5. **Giao Diện Thân Thiện & Chữ To Rõ Ràng (Tối ưu cho iPhone & Samsung):**
+   - Thanh điều hướng đáy màn hình (Bottom Navigation Bar) thuận tiện cho ngón tay cái.
    - 3 nấc chỉnh cỡ chữ (`A`, `A+`, `A++`) giúp Mẹ đọc rõ ràng trên điện thoại, iPad hoặc máy tính mà không cần đeo kính lão.
    - Tông màu hổ phách và gỗ ấm cúng, dịu mắt.
-   - Tích hợp sẵn video MV ca sĩ hát mẫu từ YouTube.
 
 ---
 
