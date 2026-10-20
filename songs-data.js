@@ -706,6 +706,163 @@ const SONGS_DATA = [
         grammarNote: "Câu ước nguyện: '(May you) bless my homeland forever'."
       }
     ]
+  },
+  {
+    id: "sad-movies",
+    title: "Sad Movies (Make Me Cry)",
+    artist: "Sue Thompson",
+    year: 1961,
+    difficulty: "Dễ (Nhịp tự sự, rõ chữ)",
+    level: "easy",
+    tempo: "Chậm, nhẹ nhàng, tự sự (Slow country-pop ballad)",
+    youtubeId: "9pK97JS0ag4",
+    theme: "Nỗi buồn tình yêu ngây thơ, sự giấu giếm dịu dàng với mẹ",
+    description: "Bản tình ca cổ điển thập niên 60 bất hủ của nữ ca sĩ Sue Thompson. Lời bài hát như một câu chuyện kể thủ thỉ, từng câu nhả chữ rất chậm rãi và phát âm cực kỳ rõ ràng, giúp Mẹ vừa cảm nhận câu chuyện vừa luyện tập thì Quá khứ đơn và cấu trúc câu tự nhiên.",
+    grammarHighlights: [
+      {
+        title: "Cấu trúc: Make someone + V (Khiến ai làm gì)",
+        formula: "S + make(s) + Tân ngữ (me/him/her) + V (nguyên mẫu)",
+        explanation: "Khiến ai đó làm gì hoặc có cảm xúc gì. Điệp khúc bài hát: 'Sad movies always make me cry' (Những thước phim buồn luôn làm tôi rơi lệ) hay 'Music makes me happy' (Âm nhạc làm tôi vui).",
+        singingExample: "Sad movies always make me cry."
+      },
+      {
+        title: "Kể chuyện bằng Thì Quá Khứ Đơn (Past Simple Tense)",
+        formula: "S + V2/ed + O",
+        explanation: "Toàn bộ bài hát là một chuỗi hành động quá khứ được kể lại: 'He said' (Anh ấy bảo), 'I went' (Tôi đi), 'turned down' (hạ đèn), 'saw' (nhìn thấy), 'walked' (bước đi).",
+        singingExample: "He said he had to work so I went to the show alone."
+      },
+      {
+        title: "Cấu trúc ngăn ngừa: Keep from + V-ing",
+        formula: "Keep (someone) from + V-ing",
+        explanation: "Mang nghĩa: Tránh khỏi, ngăn không để làm điều gì. Trong bài: 'To keep from telling her a lie' (Để khỏi phải nói dối Mẹ).",
+        singingExample: "And so to keep from telling her a lie, I just said: Sad movies make me cry."
+      }
+    ],
+    vocalTips: [
+      "Hát thủ thỉ như đang kể một câu chuyện: Bài hát này không đòi hỏi phải gồng giọng hay lên nốt quá cao, Mẹ hãy nhả chữ nhẹ nhàng, tự nhiên như đang tâm sự.",
+      "Luyến chữ 'cry': Trong câu 'always make me cry', chữ 'cry' có thể ngân dài và luyến nhẹ từ trên xuống dưới đầy xao xuyến.",
+      "Nối âm tự nhiên: 'walk in' hát nối thành /uốc-kin/, 'middle of' hát nối thành /mít-đồu-lơv/."
+    ],
+    vocab: [
+      { word: "Projector", type: "noun", ipa: "/prəˈdʒɛk.tər/", vi: "Máy chiếu phim trong rạp", tip: "Nhấn âm 2: prờ-JÉC-tơ" },
+      { word: "Darlin' (Darling)", type: "noun", ipa: "/ˈdɑːr.lɪŋ/", vi: "Người yêu dấu", tip: "Đọc êm ái: 'ĐA-linh'" },
+      { word: "Best friend", type: "noun phrase", ipa: "/bɛst frɛnd/", vi: "Người bạn thân nhất", tip: "Chữ 'best' có âm gió s nhẹ" },
+      { word: "Tears", type: "noun", ipa: "/tɪərz/", vi: "Những giọt nước mắt", tip: "Kéo dài âm 'ia-z'" }
+    ],
+    lyrics: [
+      {
+        en: "Sad movies always make me cry",
+        phonetic: "Xét mu-vi-z ô-l-uêi-z meik mi c-rai",
+        ipa: "/sæd ˈmuːviz ˈɔːlweɪz meɪk miː kraɪ/",
+        vi: "Những thước phim buồn lúc nào cũng làm tôi phải rơi lệ",
+        singingTip: "Câu mở đầu da diết, chữ 'cry' ngân nga và hạ nhẹ giọng ở cuối.",
+        grammarNote: "Hiện tại đơn diễn tả một phản xạ/thói quen: 'Sad movies always make me cry'."
+      },
+      {
+        en: "He said he had to work so I went to the show alone",
+        phonetic: "Hi sét hi hét tu uốc sô ai uen-t tu đờ sôu ơ-lôn",
+        ipa: "/hiː sɛd hiː hæd tuː wɜːrk soʊ aɪ wɛnt tuː ðə ʃoʊ əˈloʊn/",
+        vi: "Chàng bảo bận việc nên tôi đành một mình đến rạp chiếu bóng",
+        singingTip: "Nối âm nhẹ 'went to' -> 'uen-tu'. 'show alone' -> 'sôu-ơ-lôn'.",
+        grammarNote: "Câu trần thuật quá khứ: 'He said (that) he had to work'."
+      },
+      {
+        en: "They turned down the lights and turned the projector on",
+        phonetic: "Đei tơn-đ đao-n đờ lai-t-s èn tơn-đ đờ prờ-jéc-tơ ron",
+        ipa: "/ðeɪ tɜːrnd daʊn ðə laɪts ænd tɜːrnd ðə prəˈdʒɛktər ɒn/",
+        vi: "Đèn trong rạp dần tắt và máy chiếu phim bắt đầu rọi sáng",
+        singingTip: "Nối âm 'projector on' -> 'prờ-jéc-tơ-ron'. Nhịp điệu thong thả.",
+        grammarNote: "Cặp cụm động từ: 'turn down' (vặn nhỏ/tắt bớt) và 'turn on' (bật lên)."
+      },
+      {
+        en: "And just as the news of the world started to begin",
+        phonetic: "Èn dơ-st ét-z đờ niu-zơv đờ uơn-đ s-ta-tịt tu bi-gin",
+        ipa: "/ænd dʒʌst æz ðə njuːz əv ðə wɜːrld ˈstɑːrtɪd tuː bɪˈɡɪn/",
+        vi: "Và ngay khi bản tin thời sự đầu giờ vừa mới bắt đầu chiếu",
+        singingTip: "Nối 'news of' -> 'niu-zơv'. 'started to' phát âm nhẹ nhàng 's-ta-tịt tu'.",
+        grammarNote: "'Just as...' = Ngay đúng khoảnh khắc khi mà..."
+      },
+      {
+        en: "I saw my darlin' and my best friend walk in",
+        phonetic: "Ai so mai đa-linh èn mai bét-st ph-ren-đ uốc-kin",
+        ipa: "/aɪ sɔː maɪ ˈdɑːrlɪŋ ænd maɪ bɛst frɛnd wɔːk ɪn/",
+        vi: "Tôi bỗng thấy người yêu dấu cùng cô bạn thân nhất của mình bước vào",
+        singingTip: "Nối âm: 'walk in' hát liền thành 'uốc-kin'. Giọng thoáng chút ngỡ ngàng.",
+        grammarNote: "Cấu trúc giác quan: 'see someone do something' (nhìn thấy ai bước vào)."
+      },
+      {
+        en: "Though I was sittin' there they didn't see",
+        phonetic: "Đâu ai uơ-z xít-tinh đe đei đít-đừn-t xi",
+        ipa: "/ðoʊ aɪ wəz ˈsɪtɪŋ ðɛər ðeɪ ˈdɪdnt siː/",
+        vi: "Dẫu tôi đang ngồi ngay đó nhưng họ chẳng hề nhìn thấy",
+        singingTip: "'Though' đọc âm đè lưỡi /ð/. Câu hát trầm lắng đầy xót xa.",
+        grammarNote: "Liên từ 'Though' = Mặc dù, dẫu cho."
+      },
+      {
+        en: "And so they sat right down in front of me",
+        phonetic: "Èn sô đei xét rai-t đao-n in ph-răn-tơv mi",
+        ipa: "/ænd soʊ ðeɪ sæt raɪt daʊn ɪn frʌnt əv miː/",
+        vi: "Và rồi họ ngồi xuống ngay ở hàng ghế phía trước tôi",
+        singingTip: "Nối âm: 'in front of' -> 'in-ph-răn-tơv'. Nhịp điệu đều đặn.",
+        grammarNote: "Cụm giới từ chỉ vị trí: 'in front of someone' (ở ngay phía trước ai đó)."
+      },
+      {
+        en: "When he kissed her lips I almost died",
+        phonetic: "Uen hi kít-st hơ líp-s ai ô-l-môu-st đai-đ",
+        ipa: "/wɛn hiː kɪst hɜːr lɪps aɪ ˈɔːlmoʊst daɪd/",
+        vi: "Khoảnh khắc chàng đặt nụ hôn lên môi nàng, con tim tôi như chết lặng",
+        singingTip: "'kissed' phát âm đuôi /t/ (kít-st). Chữ 'died' ngân dài nghẹn ngào.",
+        grammarNote: "'almost' = gần như, suýt nữa (diễn tả cảm xúc bàng hoàng)."
+      },
+      {
+        en: "And in the middle of the color cartoon I started to cry",
+        phonetic: "Èn đin đờ mít-đồu-lơv đờ ca-lơ ca-tun nai s-ta-tịt tu c-rai",
+        ipa: "/ænd ɪn ðə ˈmɪdl əv ðə ˈkʌlər kɑːrˈtuːn aɪ ˈstɑːrtɪd tuː kraɪ/",
+        vi: "Và giữa lúc bộ phim hoạt hình rực rỡ màu sắc đang chiếu, tôi đã bật khóc",
+        singingTip: "Nối âm: 'middle of' -> 'mít-đồu-lơv', 'cartoon I' -> 'ca-tun-nai'. Đoạn dâng trào cảm xúc.",
+        grammarNote: "Cụm 'in the middle of...' = ở chính giữa lúc sự việc đang diễn ra."
+      },
+      {
+        en: "Oh-oh-oh, sad movies always make me cry",
+        phonetic: "Ô-ô-ô, xét mu-vi-z ô-l-uêi-z meik mi c-rai",
+        ipa: "/oʊ oʊ oʊ, sæd ˈmuːviz ˈɔːlweɪz meɪk miː kraɪ/",
+        vi: "Ôi, những thước phim buồn bao giờ cũng làm tôi phải rơi lệ",
+        singingTip: "ĐIỆP KHÚC ĐẶC TRƯNG: Câu hò than thở 'Oh-oh-oh' luyến láy êm ái.",
+        grammarNote: "Thán từ 'Oh-oh-oh' bộc lộ tâm trạng nén đau thương vào trong."
+      },
+      {
+        en: "And so I got up and slowly walked on home",
+        phonetic: "Èn sô ai gót-táp èn s-lâu-li uốc-t on hôm",
+        ipa: "/ænd soʊ aɪ ɡɑːt ʌp ænd ˈsloʊli wɔːkt ɒn hoʊm/",
+        vi: "Và thế là tôi lặng lẽ đứng dậy rồi chầm chậm bước đi về nhà",
+        singingTip: "Nối âm: 'got up' -> 'gót-táp'. Bước đi chậm rãi theo từng nốt nhạc.",
+        grammarNote: "'get up -> got up' (đứng dậy), 'walk home' (đi bộ về nhà)."
+      },
+      {
+        en: "And mama saw the tears and said: What's wrong?",
+        phonetic: "Èn ma-ma so đờ tia-z èn sét: Uốt-s rong?",
+        ipa: "/ænd ˈmɑːmə sɔː ðə tɪərz ænd sɛd: wʌts rɔːŋ?/",
+        vi: "Mẹ nhìn thấy những giọt lệ hoen mi liền hỏi: Có chuyện gì thế con?",
+        singingTip: "Giọng dịu dàng và ấm áp ở câu hỏi 'What's wrong?' như tình thương của mẹ.",
+        grammarNote: "Câu hỏi thăm quen thuộc: 'What's wrong?' = Có chuyện gì không ổn vậy con?"
+      },
+      {
+        en: "And so to keep from telling her a lie",
+        phonetic: "Èn sô tu kíp ph-rơm té-linh hơ ờ lai",
+        ipa: "/ænd soʊ tuː kiːp frəm ˈtɛlɪŋ hɜːr ə laɪ/",
+        vi: "Và để không phải thốt ra lời nói dối với Mẹ",
+        singingTip: "Hát nhẹ nhàng, tình cảm: người con gái giấu nỗi đau để mẹ khỏi bận lòng.",
+        grammarNote: "Cấu trúc bài học: 'keep from + V-ing' (tránh khỏi/giữ mình không làm gì)."
+      },
+      {
+        en: "I just said: Sad movies make me cry",
+        phonetic: "Ai dơ-st sét: Xét mu-vi-z meik mi c-rai",
+        ipa: "/aɪ dʒʌst sɛd: sæd ˈmuːviz meɪk miː kraɪ/",
+        vi: "Tôi chỉ đành bảo: Mẹ ơi, những bộ phim buồn cứ làm con khóc mãi thôi!",
+        singingTip: "Câu kết đầy cảm động và đáng yêu, ngân nga chữ 'cry' đến cuối.",
+        grammarNote: "'just' = chỉ là, đơn thuần chỉ là."
+      }
+    ]
   }
 ];
 

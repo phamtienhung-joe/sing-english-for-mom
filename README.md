@@ -38,6 +38,7 @@
 | **You Raise Me Up** | Josh Groban / Westlife | Cấu trúc *Raise someone up*, mệnh đề mục đích *So that*, hào hùng |
 | **Proud of You** | Fiona Fung | Cấu trúc *Be proud of*, *Can fly*, phát âm nguyên âm mở trong sáng |
 | **Edelweiss** | The Sound of Music | Điệu van 3/4, tính từ miêu tả, câu cầu chúc *May you...* |
+| **Sad Movies (Make Me Cry)** | Sue Thompson | Cấu trúc *Make someone + V*, Kể chuyện Thì Quá khứ đơn, *Keep from + V-ing* |
 
 ---
 
