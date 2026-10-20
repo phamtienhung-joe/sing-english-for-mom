@@ -1,0 +1,1168 @@
+/* ==========================================================================
+   HỌC HÁT TIẾNG ANH CÙNG MẸ - STYLESHEET
+   Thiết kế ấm áp, thân thiện, chữ to rõ ràng, hỗ trợ tối đa cho Mẹ học hát.
+   ========================================================================== */
+
+:root {
+  /* Palette màu ấm cúng, êm dịu cho mắt */
+  --color-bg: #faf7f2;
+  --color-surface: #ffffff;
+  --color-surface-soft: #f4ede4;
+  --color-surface-hover: #ede3d5;
+
+  --color-primary: #b45309;       /* Hổ phách ấm */
+  --color-primary-dark: #78350f;
+  --color-primary-light: #fef3c7;
+
+  --color-accent: #dc2626;        /* Đỏ san hô */
+  --color-secondary: #0f766e;     /* Xanh ngọc bích đằm thắm */
+  --color-secondary-light: #ccfbf1;
+
+  --color-text-main: #292524;     /* Màu đen ấm, không gây chói */
+  --color-text-muted: #57534e;
+  --color-text-light: #78716c;
+
+  --color-phonetic: #c2410c;      /* Màu cam đậm cho phiên âm tiếng Việt */
+  --color-meaning: #047857;       /* Màu xanh lục cho bản dịch nghĩa */
+  --color-tip-bg: #eff6ff;        /* Nền xanh dịu cho mẹo hát */
+  --color-tip-border: #bfdbfe;
+  --color-tip-text: #1e40af;
+
+  --color-grammar-bg: #fdf4ff;    /* Nền tím nhạt cho ngữ pháp */
+  --color-grammar-border: #f0abfc;
+  --color-grammar-text: #86198f;
+
+  /* Cỡ chữ cơ bản có thể phóng to bằng JavaScript */
+  --font-base: 17px;
+  --font-scale: 1;
+
+  /* Shadow & Bo góc mềm mại */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --shadow-sm: 0 2px 6px rgba(69, 26, 3, 0.05);
+  --shadow-md: 0 4px 14px rgba(69, 26, 3, 0.08);
+  --shadow-lg: 0 8px 24px rgba(69, 26, 3, 0.12);
+
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Các cấp độ phóng to chữ cho Mẹ */
+body.font-normal { --font-scale: 1; }
+body.font-large  { --font-scale: 1.15; }
+body.font-xlarge { --font-scale: 1.30; }
+
+/* RESET & BASE */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: calc(var(--font-base) * var(--font-scale));
+  line-height: 1.65;
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .brand-tagline, .logo-text h1 {
+  font-family: 'Comfortaa', 'Nunito', sans-serif;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ==========================================================================
+   1. UTILITY BAR (Chỉnh cỡ chữ & tốc độ đọc)
+   ========================================================================== */
+.utility-bar {
+  background: linear-gradient(90deg, #fef3c7 0%, #ffedd5 100%);
+  border-bottom: 1px solid #fed7aa;
+  padding: 8px 0;
+  font-size: calc(14px * var(--font-scale));
+}
+
+.utility-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.brand-tagline {
+  font-size: calc(14.5px * var(--font-scale));
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.user-controls {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.font-size-group, .speed-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.control-label {
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.ctrl-btn {
+  background: #ffffff;
+  border: 1px solid #d6d3d1;
+  color: var(--color-text-main);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: calc(13px * var(--font-scale));
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.ctrl-btn:hover {
+  background: var(--color-surface-soft);
+  border-color: var(--color-primary);
+}
+
+.ctrl-btn.active {
+  background: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary);
+}
+
+/* ==========================================================================
+   2. MAIN HEADER & NAVIGATION
+   ========================================================================== */
+.main-header {
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 2px solid var(--color-surface-soft);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.logo-icon {
+  font-size: calc(34px * var(--font-scale));
+  background: var(--color-primary-light);
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+}
+
+.logo-text h1 {
+  font-size: calc(21px * var(--font-scale));
+  letter-spacing: -0.5px;
+}
+
+.logo-text .subtitle {
+  font-size: calc(13px * var(--font-scale));
+  color: var(--color-text-muted);
+}
+
+.main-nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.nav-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  padding: 9px 16px;
+  border-radius: var(--radius-lg);
+  font-size: calc(15px * var(--font-scale));
+  font-weight: 700;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.nav-item:hover {
+  background: var(--color-surface-soft);
+  color: var(--color-primary-dark);
+}
+
+.nav-item.active {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  box-shadow: 0 2px 8px rgba(180, 83, 9, 0.15);
+}
+
+/* ==========================================================================
+   3. PANELS & COMMON VIEWS
+   ========================================================================== */
+.main-content {
+  padding-top: 28px;
+  padding-bottom: 60px;
+}
+
+.view-panel {
+  display: none;
+}
+
+.view-panel.active {
+  display: block;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section-hero {
+  text-align: center;
+  max-width: 820px;
+  margin: 0 auto 30px auto;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  font-weight: 700;
+  font-size: calc(13px * var(--font-scale));
+  padding: 5px 14px;
+  border-radius: var(--radius-xl);
+  margin-bottom: 12px;
+}
+
+.section-hero h2 {
+  font-size: calc(26px * var(--font-scale));
+  margin-bottom: 10px;
+}
+
+.hero-lead {
+  font-size: calc(16.5px * var(--font-scale));
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+/* ==========================================================================
+   4. SECTION 1: SONG LIBRARY
+   ========================================================================== */
+.filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 24px;
+  background: var(--color-surface);
+  padding: 12px 18px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: var(--color-surface-soft);
+  border: none;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  font-size: calc(14px * var(--font-scale));
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.filter-btn.active, .filter-btn:hover {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+.search-box input {
+  padding: 9px 16px;
+  border: 1px solid #d6d3d1;
+  border-radius: var(--radius-lg);
+  font-size: calc(14.5px * var(--font-scale));
+  width: 260px;
+  outline: none;
+  transition: var(--transition);
+}
+
+.search-box input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(180, 83, 9, 0.15);
+}
+
+.songs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 22px;
+}
+
+.song-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid #f0e6d9;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.song-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: #fed7aa;
+}
+
+.song-card-header {
+  padding: 20px 22px 14px 22px;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border-bottom: 1px solid #fef08a;
+  position: relative;
+}
+
+.song-badge-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.difficulty-badge {
+  font-size: calc(12px * var(--font-scale));
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  background: #dcfce7;
+  color: #166534;
+}
+
+.difficulty-badge.medium {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.song-year {
+  font-size: calc(12.5px * var(--font-scale));
+  font-weight: 600;
+  color: var(--color-text-light);
+}
+
+.song-card-title {
+  font-size: calc(21px * var(--font-scale));
+  margin-bottom: 4px;
+  color: var(--color-primary-dark);
+}
+
+.song-card-artist {
+  font-size: calc(15px * var(--font-scale));
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.song-card-body {
+  padding: 18px 22px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.song-card-desc {
+  font-size: calc(14.5px * var(--font-scale));
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.song-card-meta {
+  background: var(--color-surface-soft);
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  font-size: calc(13px * var(--font-scale));
+  color: var(--color-text-muted);
+  margin-bottom: 18px;
+}
+
+.song-card-meta div {
+  margin-bottom: 4px;
+}
+
+.song-card-meta div:last-child {
+  margin-bottom: 0;
+}
+
+.song-card-btn {
+  width: 100%;
+  background: var(--color-primary);
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  border-radius: var(--radius-lg);
+  font-size: calc(16px * var(--font-scale));
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.song-card-btn:hover {
+  background: var(--color-primary-dark);
+}
+
+/* ==========================================================================
+   5. SECTION 2: SONG PRACTICE STUDIO
+   ========================================================================== */
+.song-header-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 24px;
+  border: 1px solid #f0e6d9;
+}
+
+.header-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.song-titles h2 {
+  font-size: calc(28px * var(--font-scale));
+  margin-bottom: 4px;
+}
+
+.song-artist-tag {
+  font-size: calc(17px * var(--font-scale));
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.header-action-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-secondary {
+  background: var(--color-surface-soft);
+  color: var(--color-primary-dark);
+  border: 1px solid #fed7aa;
+  padding: 9px 16px;
+  border-radius: var(--radius-lg);
+  font-size: calc(14.5px * var(--font-scale));
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+}
+
+.btn-secondary:hover {
+  background: var(--color-primary-light);
+}
+
+.song-info-pills {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.info-pill {
+  background: var(--color-surface-soft);
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  font-size: calc(13.5px * var(--font-scale));
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+/* YOUTUBE EMBED CONTAINER */
+.youtube-box {
+  margin-top: 20px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  background: #000000;
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  height: 0;
+}
+
+.youtube-box iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* SONG SUB-NAV TABS */
+.song-subnav {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 22px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.subnav-btn {
+  background: var(--color-surface);
+  border: 1px solid #e7e5e4;
+  padding: 11px 18px;
+  border-radius: var(--radius-lg);
+  font-size: calc(15.5px * var(--font-scale));
+  font-weight: 700;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+
+.subnav-btn.active {
+  background: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(180, 83, 9, 0.25);
+}
+
+.song-tab-panel {
+  display: none;
+}
+
+.song-tab-panel.active {
+  display: block;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.lyric-instruction-box, .panel-intro-box {
+  background: #eff6ff;
+  border-left: 4px solid #3b82f6;
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: calc(15px * var(--font-scale));
+  color: #1e3a8a;
+}
+
+.panel-intro-box {
+  display: block;
+  background: #fdf4ff;
+  border-left-color: #c084fc;
+  color: #581c87;
+}
+
+.panel-intro-box h3 {
+  font-size: calc(18px * var(--font-scale));
+  margin-bottom: 4px;
+  color: #581c87;
+}
+
+/* LYRIC ITEM CARD */
+.lyrics-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.lyric-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  padding: 20px 24px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid #f0e6d9;
+  transition: var(--transition);
+}
+
+.lyric-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: #fed7aa;
+}
+
+.lyric-card.highlighted {
+  border-left: 6px solid var(--color-primary);
+  background: #fffdfa;
+}
+
+.lyric-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.line-number {
+  font-size: calc(12.5px * var(--font-scale));
+  font-weight: 800;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.speak-line-btn {
+  background: var(--color-surface-soft);
+  border: 1px solid #d6d3d1;
+  color: var(--color-primary-dark);
+  padding: 6px 14px;
+  border-radius: var(--radius-xl);
+  font-size: calc(14px * var(--font-scale));
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+}
+
+.speak-line-btn:hover {
+  background: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary);
+}
+
+.lyric-english {
+  font-size: calc(22px * var(--font-scale));
+  font-weight: 800;
+  color: var(--color-primary-dark);
+  margin-bottom: 8px;
+  letter-spacing: 0.2px;
+}
+
+.lyric-phonetic-row {
+  margin-bottom: 8px;
+}
+
+.phonetic-guide {
+  font-size: calc(17px * var(--font-scale));
+  font-weight: 700;
+  color: var(--color-phonetic);
+  background: #fff7ed;
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: var(--radius-md);
+  border: 1px dashed #fed7aa;
+}
+
+.ipa-text {
+  font-size: calc(14px * var(--font-scale));
+  color: var(--color-text-light);
+  margin-left: 8px;
+  font-style: italic;
+}
+
+.lyric-vietnamese {
+  font-size: calc(17px * var(--font-scale));
+  font-weight: 600;
+  color: var(--color-meaning);
+  margin-bottom: 12px;
+}
+
+.lyric-tips-box {
+  background: var(--color-tip-bg);
+  border: 1px solid var(--color-tip-border);
+  color: var(--color-tip-text);
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  font-size: calc(13.5px * var(--font-scale));
+  margin-bottom: 6px;
+  display: flex;
+  gap: 8px;
+}
+
+.lyric-grammar-box {
+  background: var(--color-grammar-bg);
+  border: 1px solid var(--color-grammar-border);
+  color: var(--color-grammar-text);
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  font-size: calc(13.5px * var(--font-scale));
+  display: flex;
+  gap: 8px;
+}
+
+/* ==========================================================================
+   6. GRAMMAR CARDS & VOCABULARY
+   ========================================================================== */
+.grammar-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.grammar-highlight-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  padding: 22px 26px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid #f0e6d9;
+}
+
+.grammar-highlight-card h4 {
+  font-size: calc(19px * var(--font-scale));
+  margin-bottom: 8px;
+  color: var(--color-primary-dark);
+}
+
+.grammar-formula-badge {
+  display: inline-block;
+  background: #fef08a;
+  color: #713f12;
+  font-family: monospace;
+  font-weight: 700;
+  font-size: calc(14px * var(--font-scale));
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+}
+
+.grammar-explanation {
+  font-size: calc(15.5px * var(--font-scale));
+  color: var(--color-text-main);
+  margin-bottom: 12px;
+  line-height: 1.7;
+}
+
+.grammar-example-box {
+  background: var(--color-surface-soft);
+  border-left: 3px solid var(--color-primary);
+  padding: 10px 14px;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-size: calc(15px * var(--font-scale));
+  font-style: italic;
+  color: var(--color-primary-dark);
+}
+
+.vocab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.vocab-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid #f0e6d9;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.vocab-word-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+
+.vocab-word {
+  font-size: calc(19px * var(--font-scale));
+  font-weight: 800;
+  color: var(--color-primary-dark);
+}
+
+.vocab-type {
+  font-size: calc(12px * var(--font-scale));
+  color: var(--color-text-light);
+  font-style: italic;
+}
+
+.vocab-ipa {
+  font-size: calc(13.5px * var(--font-scale));
+  color: var(--color-phonetic);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.vocab-vi {
+  font-size: calc(15.5px * var(--font-scale));
+  font-weight: 700;
+  color: var(--color-meaning);
+  margin-bottom: 10px;
+}
+
+.vocab-tip {
+  font-size: calc(13px * var(--font-scale));
+  background: #fefce8;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  color: #854d0e;
+}
+
+.tips-box-content ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tips-box-content li {
+  background: var(--color-surface);
+  padding: 16px 20px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  font-size: calc(16px * var(--font-scale));
+  border-left: 4px solid var(--color-primary);
+  line-height: 1.7;
+}
+
+/* ==========================================================================
+   7. SECTION 3: GENERAL GRAMMAR GUIDE
+   ========================================================================== */
+.general-grammar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.general-grammar-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  padding: 26px 30px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid #f0e6d9;
+}
+
+.general-grammar-card h3 {
+  font-size: calc(22px * var(--font-scale));
+  color: var(--color-primary-dark);
+  margin-bottom: 10px;
+}
+
+.general-grammar-desc {
+  font-size: calc(16px * var(--font-scale));
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+}
+
+.sub-points-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sub-point-item {
+  background: var(--color-surface-soft);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+}
+
+.sub-point-item h4 {
+  font-size: calc(17px * var(--font-scale));
+  color: var(--color-primary-dark);
+  margin-bottom: 6px;
+}
+
+.sub-point-rule {
+  font-size: calc(15px * var(--font-scale));
+  color: var(--color-text-main);
+  margin-bottom: 12px;
+}
+
+.sub-point-examples {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px;
+}
+
+.example-mini-card {
+  background: #ffffff;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid #e7e5e4;
+  font-size: calc(14px * var(--font-scale));
+}
+
+.example-en {
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.example-sing {
+  color: var(--color-phonetic);
+  font-weight: 700;
+}
+
+.example-vi {
+  color: var(--color-meaning);
+}
+
+/* ==========================================================================
+   8. SECTION 4: VOICE RECORDER
+   ========================================================================== */
+.recorder-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  padding: 36px 30px;
+  box-shadow: var(--shadow-lg);
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+  border: 1px solid #f0e6d9;
+}
+
+.recorder-visual {
+  margin-bottom: 26px;
+}
+
+.mic-circle {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 16px auto;
+  border-radius: 50%;
+  background: var(--color-surface-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(44px * var(--font-scale));
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.08);
+  transition: var(--transition);
+}
+
+.mic-circle.recording {
+  background: #fee2e2;
+  color: #dc2626;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+  70% { transform: scale(1.08); box-shadow: 0 0 0 16px rgba(220, 38, 38, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+}
+
+.record-status {
+  font-size: calc(16.5px * var(--font-scale));
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-bottom: 6px;
+}
+
+.record-timer {
+  font-size: calc(24px * var(--font-scale));
+  font-weight: 800;
+  font-family: monospace;
+  color: var(--color-primary);
+}
+
+.recorder-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.record-btn {
+  padding: 12px 22px;
+  border-radius: var(--radius-xl);
+  font-size: calc(16px * var(--font-scale));
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+}
+
+.record-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn-primary { background: #dc2626; color: #ffffff; }
+.btn-primary:hover:not(:disabled) { background: #b91c1c; transform: translateY(-2px); }
+
+.btn-danger { background: #475569; color: #ffffff; }
+.btn-danger:hover:not(:disabled) { background: #334155; }
+
+.btn-success { background: #15803d; color: #ffffff; }
+.btn-success:hover:not(:disabled) { background: #166534; transform: translateY(-2px); }
+
+.recorder-tips-card {
+  text-align: left;
+  background: var(--color-surface-soft);
+  padding: 18px 22px;
+  border-radius: var(--radius-lg);
+  margin-top: 24px;
+}
+
+.recorder-tips-card h4 {
+  font-size: calc(16px * var(--font-scale));
+  margin-bottom: 8px;
+  color: var(--color-primary-dark);
+}
+
+.recorder-tips-card ul {
+  padding-left: 20px;
+  font-size: calc(14.5px * var(--font-scale));
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+/* ==========================================================================
+   9. QUICK SPEAK FLOATING PILL
+   ========================================================================== */
+.quick-speak-pill {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--color-primary-dark);
+  color: #ffffff;
+  padding: 10px 18px;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  font-size: calc(14px * var(--font-scale));
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition);
+}
+
+.quick-speak-pill:hover {
+  background: var(--color-primary);
+  transform: translateY(-3px);
+}
+
+/* ==========================================================================
+   10. FOOTER
+   ========================================================================== */
+.main-footer {
+  background: var(--color-surface);
+  border-top: 1px solid #e7e5e4;
+  padding: 30px 0;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.love-note {
+  font-size: calc(16px * var(--font-scale));
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: 6px;
+}
+
+.sub-note {
+  font-size: calc(13px * var(--font-scale));
+  color: var(--color-text-light);
+}
+
+/* ==========================================================================
+   11. RESPONSIVE DESIGN (Mobile & Tablet)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .main-nav {
+    justify-content: space-around;
+  }
+
+  .nav-item {
+    padding: 8px 10px;
+    font-size: calc(13.5px * var(--font-scale));
+  }
+
+  .nav-text {
+    font-size: calc(13px * var(--font-scale));
+  }
+
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  .songs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lyric-card {
+    padding: 16px 18px;
+  }
+
+  .lyric-english {
+    font-size: calc(19px * var(--font-scale));
+  }
+
+  .subnav-btn {
+    padding: 9px 14px;
+    font-size: calc(14px * var(--font-scale));
+  }
+}

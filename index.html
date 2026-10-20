@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Học Hát Tiếng Anh Cùng Mẹ | Sing English for Mom</title>
+  <meta name="description" content="Trang web học tiếng Anh qua bài hát dành riêng cho Mẹ: phiên âm dễ hát, giải thích ngữ pháp bài hát song ngữ Anh - Việt, mẹo nối âm và luyện phát âm chuẩn.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="font-normal theme-warm">
+  <!-- TOP UTILITY BAR (Cỡ chữ cho Mẹ, Chế độ đọc) -->
+  <aside class="utility-bar" aria-label="Tiện ích hỗ trợ">
+    <div class="container utility-content">
+      <div class="brand-tagline">
+        <span class="icon">🌸</span> Dành tặng Mẹ yêu: Học tiếng Anh nhẹ nhàng qua từng giai điệu
+      </div>
+      <div class="user-controls">
+        <!-- Chỉnh cỡ chữ to nhỏ -->
+        <div class="font-size-group" title="Chỉnh cỡ chữ to rõ hơn cho Mẹ">
+          <span class="control-label">Cỡ chữ:</span>
+          <button id="btn-font-normal" class="ctrl-btn active" onclick="setFontSize('normal')">A</button>
+          <button id="btn-font-large" class="ctrl-btn" onclick="setFontSize('large')">A+</button>
+          <button id="btn-font-xlarge" class="ctrl-btn" onclick="setFontSize('xlarge')">A++</button>
+        </div>
+
+        <!-- Tốc độ đọc mẫu -->
+        <div class="speed-group" title="Tốc độ đọc mẫu phát âm tiếng Anh">
+          <span class="control-label">Tốc độ đọc:</span>
+          <button id="btn-speed-slow" class="ctrl-btn" onclick="setSpeechSpeed(0.75)">0.75x (Chậm)</button>
+          <button id="btn-speed-normal" class="ctrl-btn active" onclick="setSpeechSpeed(1.0)">1.0x (Chuẩn)</button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN HEADER -->
+  <header class="main-header">
+    <div class="container header-container">
+      <div class="logo-area" onclick="switchNav('library')">
+        <div class="logo-icon">🎵</div>
+        <div class="logo-text">
+          <h1>Hát Tiếng Anh Cùng Mẹ</h1>
+          <p class="subtitle">Singing English Hub • Lời ca song ngữ & Ngữ pháp hát hay</p>
+        </div>
+      </div>
+
+      <!-- MAIN NAVIGATION -->
+      <nav class="main-nav" aria-label="Điều hướng chính">
+        <button class="nav-item active" id="nav-library" onclick="switchNav('library')">
+          <span class="nav-icon">📚</span>
+          <span class="nav-text">Chọn Bài Hát</span>
+        </button>
+        <button class="nav-item" id="nav-practice" onclick="switchNav('practice')">
+          <span class="nav-icon">🎤</span>
+          <span class="nav-text">Luyện Từng Câu</span>
+        </button>
+        <button class="nav-item" id="nav-grammar" onclick="switchNav('grammar')">
+          <span class="nav-icon">📖</span>
+          <span class="nav-text">Cẩm Nang Ngữ Pháp</span>
+        </button>
+        <button class="nav-item" id="nav-recorder" onclick="switchNav('recorder')">
+          <span class="nav-icon">🎙️</span>
+          <span class="nav-text">Góc Ghi Âm Của Mẹ</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT AREA -->
+  <main class="container main-content">
+
+    <!-- ============================================== -->
+    <!-- SECTION 1: THƯ VIỆN BÀI HÁT (SONG LIBRARY) -->
+    <!-- ============================================== -->
+    <section id="view-library" class="view-panel active">
+      <div class="section-hero">
+        <div class="hero-badge">Tuyển chọn các khúc ca bất hủ dễ nhớ, từ ngữ êm dịu</div>
+        <h2>Mẹ muốn tập hát bài nào hôm nay?</h2>
+        <p class="hero-lead">Mỗi bài hát đều được dịch thơ song ngữ, có phiên âm tiếng Việt hỗ trợ giọng hát, phân tích ngữ pháp trực tiếp và bí quyết nối âm cho từng nốt nhạc.</p>
+      </div>
+
+      <!-- BỘ LỌC BÀI HÁT -->
+      <div class="filter-bar">
+        <div class="filter-tabs">
+          <button class="filter-btn active" onclick="filterSongs('all', this)">Tất cả bài hát</button>
+          <button class="filter-btn" onclick="filterSongs('easy', this)">Dễ cho người mới bắt đầu</button>
+          <button class="filter-btn" onclick="filterSongs('medium', this)">Bài ca sâu lắng, truyền cảm</button>
+        </div>
+        <div class="search-box">
+          <input type="text" id="song-search-input" placeholder="🔍 Tìm tên bài hát, ca sĩ..." oninput="handleSearch(this.value)">
+        </div>
+      </div>
+
+      <!-- DANH SÁCH THẺ BÀI HÁT -->
+      <div id="songs-grid" class="songs-grid">
+        <!-- Render bằng Javascript -->
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- SECTION 2: PHÒNG LUYỆN HÁT CHI TIẾT (SONG STUDIO) -->
+    <!-- ============================================== -->
+    <section id="view-practice" class="view-panel">
+      <!-- Banner bài hát đang chọn -->
+      <div id="current-song-header" class="song-header-card">
+        <!-- Render từ Javascript -->
+      </div>
+
+      <!-- THANH ĐIỀU HƯỚNG TABS BÀI HÁT -->
+      <div class="song-subnav">
+        <button class="subnav-btn active" id="tab-lyrics" onclick="switchSongTab('lyrics')">
+          <span>🎤</span> Lời Bài Hát & Phiên Âm
+        </button>
+        <button class="subnav-btn" id="tab-grammar" onclick="switchSongTab('grammar')">
+          <span>📖</span> Ngữ Pháp Trong Bài
+        </button>
+        <button class="subnav-btn" id="tab-vocab" onclick="switchSongTab('vocab')">
+          <span>💎</span> Từ Vựng Hát Hay
+        </button>
+        <button class="subnav-btn" id="tab-tips" onclick="switchSongTab('tips')">
+          <span>💡</span> Mẹo Khẩu Hình & Hơi Thở
+        </button>
+      </div>
+
+      <!-- TAB 1: TỪNG CÂU HÁT & PHIÊN ÂM TIẾNG VIỆT -->
+      <div id="song-panel-lyrics" class="song-tab-panel active">
+        <div class="lyric-instruction-box">
+          <div class="inst-icon">💡</div>
+          <div class="inst-text">
+            <strong>Mẹo cho Mẹ:</strong> Bấm vào nút <strong>🔊 Nghe đọc</strong> ở mỗi câu để nghe giọng bản xứ phát âm chuẩn. Mẹ hãy nhìn vào dòng <em>chữ màu cam (phiên âm trợ âm)</em> để bắt nhịp nối âm dễ dàng nhé!
+          </div>
+        </div>
+
+        <div id="lyrics-container" class="lyrics-list">
+          <!-- Render danh sách câu hát bằng JS -->
+        </div>
+      </div>
+
+      <!-- TAB 2: NGỮ PHÁP TRONG BÀI HÁT NÀY -->
+      <div id="song-panel-grammar" class="song-tab-panel">
+        <div class="panel-intro-box">
+          <h3>Các Cấu Trúc Ngữ Pháp Xuất Hiện Trong Bài Hát</h3>
+          <p>Mẹ không cần học thuộc máy móc. Hãy cảm nhận ý nghĩa của từng cấu trúc qua chính câu hát mà Mẹ yêu thích!</p>
+        </div>
+        <div id="song-grammar-container" class="grammar-card-list">
+          <!-- Render ngữ pháp bài hát bằng JS -->
+        </div>
+      </div>
+
+      <!-- TAB 3: TỪ VỰNG HÁT HAY -->
+      <div id="song-panel-vocab" class="song-tab-panel">
+        <div class="panel-intro-box">
+          <h3>Từ Vựng Cốt Lõi Để Mẹ Hát Tròn Vành Rõ Chữ</h3>
+          <p>Các từ chìa khóa tạo nên cảm xúc của bài hát, kèm theo hướng dẫn đặt khẩu hình miệng.</p>
+        </div>
+        <div id="song-vocab-container" class="vocab-grid">
+          <!-- Render từ vựng bằng JS -->
+        </div>
+      </div>
+
+      <!-- TAB 4: MẸO HÁT & KHẨU HÌNH -->
+      <div id="song-panel-tips" class="song-tab-panel">
+        <div class="panel-intro-box">
+          <h3>Bí Quyết Hát Tròn Tiếng & Lấy Hơi</h3>
+          <p>Những lưu ý đặc biệt cho riêng bài hát này để giọng hát của Mẹ bay bổng, không bị hụt hơi.</p>
+        </div>
+        <div id="song-tips-container" class="tips-box-content">
+          <!-- Render mẹo hát bằng JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- SECTION 3: CẨM NANG NGỮ PHÁP HÁT TIẾNG ANH (GRAMMAR HUB) -->
+    <!-- ============================================== -->
+    <section id="view-grammar" class="view-panel">
+      <div class="section-hero">
+        <div class="hero-badge">Cẩm nang đặc biệt cho người yêu ca hát</div>
+        <h2>Học Ngữ Pháp Qua Lời Ca: Dễ Hiểu & Gần Gũi</h2>
+        <p class="hero-lead">Tại sao người bản xứ hát nghe mượt mà không vấp? Tại sao có những từ viết tắt như <em>gonna, wanna, 'cause</em>? Cẩm nang này sẽ giải đáp tất cả bằng tiếng Việt ấm áp, thân tình cho Mẹ.</p>
+      </div>
+
+      <div id="general-grammar-container" class="general-grammar-list">
+        <!-- Render cẩm nang bằng JS -->
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- SECTION 4: GÓC GHI ÂM CỦA MẸ (MOM'S VOICE STUDIO) -->
+    <!-- ============================================== -->
+    <section id="view-recorder" class="view-panel">
+      <div class="section-hero">
+        <div class="hero-badge">Phòng tập luyện riêng tư của Mẹ</div>
+        <h2>Góc Thu Âm & Lắng Nghe Giọng Hát Của Mẹ</h2>
+        <p class="hero-lead">Mẹ hãy bấm nút <strong>Ghi Âm</strong>, cất tiếng hát thử một câu hoặc một đoạn ngắn, sau đó bấm <strong>Nghe lại</strong> để thấy sự tiến bộ mỗi ngày của mình nhé!</p>
+      </div>
+
+      <div class="recorder-card">
+        <div class="recorder-visual">
+          <div class="mic-circle" id="mic-circle">
+            <span class="mic-icon">🎙️</span>
+          </div>
+          <div class="record-status" id="record-status">Sẵn sàng để thu âm giọng hát của Mẹ</div>
+          <div class="record-timer" id="record-timer">00:00</div>
+        </div>
+
+        <div class="recorder-actions">
+          <button id="btn-start-record" class="record-btn btn-primary" onclick="startRecording()">
+            <span>🔴</span> Bắt Đầu Ghi Âm
+          </button>
+          <button id="btn-stop-record" class="record-btn btn-danger" onclick="stopRecording()" disabled>
+            <span>⏹️</span> Dừng Ghi Âm
+          </button>
+          <button id="btn-play-record" class="record-btn btn-success" onclick="playRecording()" disabled>
+            <span>▶️</span> Nghe Lại Giọng Mẹ
+          </button>
+        </div>
+
+        <div class="recorder-audio-holder" id="audio-playback-holder">
+          <audio id="audio-playback" controls style="display:none; width: 100%; margin-top: 20px;"></audio>
+        </div>
+
+        <div class="recorder-tips-card">
+          <h4>💡 Mẹo nhỏ cho Mẹ khi thu âm:</h4>
+          <ul>
+            <li>Để điện thoại hoặc máy tính cách miệng khoảng 1 gang tay (khoảng 20cm).</li>
+            <li>Hít một hơi thật sâu bằng bụng trước khi cất tiếng hát để giọng vang và không bị run.</li>
+            <li>Đừng ngại ngùng nếu ban đầu phát âm chưa quen! Hát là để vui và thư giãn tâm hồn Mẹ nhé!</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="main-footer">
+    <div class="container footer-content">
+      <p class="love-note">💖 Thiết kế dành riêng tặng Mẹ với trọn vẹn yêu thương và tự hào.</p>
+      <p class="sub-note">Trang web tĩnh lưu trữ miễn phí trọn đời trên GitHub Pages • Dễ dàng mở trên mọi điện thoại & máy tính</p>
+    </div>
+  </footer>
+
+  <!-- FLOATING QUICK SPEAK HELPER FOR ANY SELECTED TEXT -->
+  <div id="quick-speak-pill" class="quick-speak-pill" style="display:none;" onclick="speakSelectedText()">
+    <span>🔊</span> Nghe phát âm chữ này
+  </div>
+
+  <!-- SCRIPT FILES -->
+  <script src="songs-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
