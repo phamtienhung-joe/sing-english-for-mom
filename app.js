@@ -1,6 +1,7 @@
 /**
- * HỌC HÁT TIẾNG ANH CÙNG MẸ - APP JAVASCRIPT
- * Xử lý tương tác, phát âm giọng chuẩn bản xứ, thu âm giọng hát và hiển thị bài học.
+ * HỌC HÁT TIẾNG ANH CÙNG MẸ - APP JAVASCRIPT (MOBILE-FIRST)
+ * Xử lý tương tác mượt mà trên iPhone & Android (Samsung),
+ * phát âm giọng bản xứ, thu âm giọng hát và hiển thị bài học.
  */
 
 // STATE QUẢN LÝ ỨNG DỤNG
@@ -40,6 +41,8 @@ function loadSavedSettings() {
   const savedSpeed = localStorage.getItem('singMom_speechSpeed');
   if (savedSpeed) {
     setSpeechSpeed(parseFloat(savedSpeed), false);
+  } else {
+    updateSpeedButtonDisplay();
   }
 
   const savedSongId = localStorage.getItem('singMom_lastSongId');
@@ -54,7 +57,7 @@ function setFontSize(size, save = true) {
   document.body.classList.remove('font-normal', 'font-large', 'font-xlarge');
   document.body.classList.add(`font-${size}`);
 
-  document.querySelectorAll('.font-size-group .ctrl-btn').forEach(btn => {
+  document.querySelectorAll('.segmented-control .seg-btn').forEach(btn => {
     btn.classList.remove('active');
   });
 
@@ -66,22 +69,24 @@ function setFontSize(size, save = true) {
   }
 }
 
-// Chỉnh tốc độ phát âm mẫu
+// Chỉnh tốc độ phát âm mẫu (toggle 0.75x <-> 1.0x)
+function toggleSpeechSpeed() {
+  const newSpeed = appState.speechRate === 1.0 ? 0.75 : 1.0;
+  setSpeechSpeed(newSpeed, true);
+}
+
 function setSpeechSpeed(speed, save = true) {
   appState.speechRate = speed;
-
-  document.querySelectorAll('.speed-group .ctrl-btn').forEach(btn => {
-    btn.classList.remove('active');
-  });
-
-  if (speed < 0.9) {
-    document.getElementById('btn-speed-slow')?.classList.add('active');
-  } else {
-    document.getElementById('btn-speed-normal')?.classList.add('active');
-  }
-
+  updateSpeedButtonDisplay();
   if (save) {
     localStorage.setItem('singMom_speechSpeed', speed.toString());
+  }
+}
+
+function updateSpeedButtonDisplay() {
+  const label = document.getElementById('speed-label');
+  if (label) {
+    label.textContent = appState.speechRate === 0.75 ? '0.75x Chậm' : '1.0x Chuẩn';
   }
 }
 
@@ -91,25 +96,25 @@ function setSpeechSpeed(speed, save = true) {
 function switchNav(navKey) {
   appState.activeNav = navKey;
 
-  // Cập nhật tab trên Header
-  document.querySelectorAll('.main-nav .nav-item').forEach(el => el.classList.remove('active'));
+  // Cập nhật tab trên Bottom Navigation Bar
+  document.querySelectorAll('.bottom-tab-bar .bottom-tab-item').forEach(el => el.classList.remove('active'));
   document.getElementById(`nav-${navKey}`)?.classList.add('active');
 
   // Chuyển view panel
   document.querySelectorAll('.view-panel').forEach(panel => panel.classList.remove('active'));
   document.getElementById(`view-${navKey}`)?.classList.add('active');
 
-  // Cuộn mượt lên đầu trang
+  // Cuộn mượt lên đỉnh màn hình
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function switchSongTab(tabKey) {
   appState.activeSongTab = tabKey;
 
-  document.querySelectorAll('.song-subnav .subnav-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.mobile-subnav-scroll .subnav-tab').forEach(btn => btn.classList.remove('active'));
   document.getElementById(`tab-${tabKey}`)?.classList.add('active');
 
-  document.querySelectorAll('.song-tab-panel').forEach(panel => panel.classList.remove('active'));
+  document.querySelectorAll('.song-subpanel').forEach(panel => panel.classList.remove('active'));
   document.getElementById(`song-panel-${tabKey}`)?.classList.add('active');
 }
 
@@ -118,24 +123,27 @@ function switchSongTab(tabKey) {
    ========================================================================== */
 function speakText(text) {
   if (!('speechSynthesis' in window)) {
-    alert('Trình duyệt của Mẹ chưa hỗ trợ tính năng phát âm. Mẹ hãy dùng Chrome hoặc Safari nhé!');
+    alert('Trình duyệt chưa hỗ trợ tính năng phát âm. Mẹ vui lòng mở trang trên Google Chrome hoặc Safari nhé!');
     return;
   }
 
-  // Dừng âm thanh đang đọc dở nếu có
+  // Dừng âm thanh đang phát trước đó nếu có
   window.speechSynthesis.cancel();
 
-  // Làm sạch chuỗi trước khi đọc (bỏ ký tự lạ, giữ nguyên từ tiếng Anh)
+  // Làm sạch chuỗi trước khi đọc
   const cleanText = text.replace(/[/\\#,+()$~%.'":*?<>{}]/g, ' ').trim();
   const utterance = new SpeechSynthesisUtterance(cleanText);
 
   utterance.lang = 'en-US';
-  utterance.rate = appState.speechRate; // 0.75x hoặc 1.0x
+  utterance.rate = appState.speechRate;
   utterance.pitch = 1.0;
 
-  // Ưu tiên chọn giọng đọc tiếng Anh tự nhiên nhất
+  // Ưu tiên chọn giọng đọc tiếng Anh tự nhiên
   const voices = window.speechSynthesis.getVoices();
-  const preferredVoice = voices.find(v => (v.lang === 'en-US' || v.lang === 'en_US') && (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Samantha')));
+  const preferredVoice = voices.find(v =>
+    (v.lang === 'en-US' || v.lang === 'en_US') &&
+    (v.name.includes('Google') || v.name.includes('Natural') || v.name.includes('Samantha') || v.name.includes('Karen'))
+  );
   if (preferredVoice) {
     utterance.voice = preferredVoice;
   }
@@ -143,7 +151,7 @@ function speakText(text) {
   window.speechSynthesis.speak(utterance);
 }
 
-// Bấm vào từ bất kỳ trên trang để nghe đọc
+// Bôi đen từ bất kỳ trên màn hình để nghe đọc riêng từ đó
 function setupTextSelectionHelper() {
   const quickPill = document.getElementById('quick-speak-pill');
 
@@ -183,11 +191,16 @@ function renderSongLibrary() {
     return matchesCategory && matchesSearch;
   });
 
+  const clearBtn = document.getElementById('search-clear-btn');
+  if (clearBtn) {
+    clearBtn.style.display = appState.searchQuery ? 'flex' : 'none';
+  }
+
   if (filtered.length === 0) {
     grid.innerHTML = `
-      <div style="grid-column: 1/-1; text-align: center; padding: 40px; background: #fff; border-radius: 20px;">
-        <p style="font-size: 20px; color: var(--color-text-muted);">Không tìm thấy bài hát nào phù hợp với từ khóa "${appState.searchQuery}".</p>
-        <button class="btn-secondary" style="margin-top: 15px;" onclick="resetSearch()">Xem tất cả bài hát</button>
+      <div style="text-align: center; padding: 36px 16px; background: #fff; border-radius: 18px; border: 1px solid #ebdcd0;">
+        <p style="font-size: 16px; color: var(--text-muted); margin-bottom: 12px;">Không tìm thấy bài hát nào với từ khóa "${appState.searchQuery}".</p>
+        <button class="btn-secondary" style="margin: 0 auto;" onclick="resetSearch()">Xem tất cả bài hát</button>
       </div>
     `;
     return;
@@ -206,8 +219,8 @@ function renderSongLibrary() {
       <div class="song-card-body">
         <p class="song-card-desc">${song.description}</p>
         <div class="song-card-meta">
-          <div><strong>🎼 Giai điệu:</strong> ${song.tempo}</div>
-          <div><strong>🌸 Chủ đề:</strong> ${song.theme}</div>
+          <div><strong>🎼 Điệu:</strong> ${song.tempo}</div>
+          <div><strong>🌸 Cảm xúc:</strong> ${song.theme}</div>
         </div>
         <button class="song-card-btn" onclick="selectAndPracticeSong('${song.id}')">
           <span>🎤</span> Bấm Vào Học Hát Bài Này
@@ -219,7 +232,7 @@ function renderSongLibrary() {
 
 function filterSongs(category, btnElement) {
   appState.currentCategory = category;
-  document.querySelectorAll('.filter-tabs .filter-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.filter-pills-scroll .pill-btn').forEach(btn => btn.classList.remove('active'));
   if (btnElement) btnElement.classList.add('active');
   renderSongLibrary();
 }
@@ -233,11 +246,11 @@ function resetSearch() {
   appState.searchQuery = '';
   const input = document.getElementById('song-search-input');
   if (input) input.value = '';
-  filterSongs('all', document.querySelector('.filter-tabs .filter-btn'));
+  filterSongs('all', document.querySelector('.filter-pills-scroll .pill-btn'));
 }
 
 /* ==========================================================================
-   5. RENDER BÀI HÁT CHI TIẾT (SONG PRACTICE STUDIO)
+   5. RENDER BÀI HÁT CHI TIẾT (SONG STUDIO)
    ========================================================================== */
 function selectAndPracticeSong(songId) {
   appState.currentSongId = songId;
@@ -250,29 +263,28 @@ function selectAndPracticeSong(songId) {
 function renderCurrentSong() {
   const song = SONGS_DATA.find(s => s.id === appState.currentSongId) || SONGS_DATA[0];
 
-  // 1. Header bài hát
+  // 1. Header chi tiết bài hát
   const headerContainer = document.getElementById('current-song-header');
   if (headerContainer) {
     headerContainer.innerHTML = `
       <div class="header-top-row">
         <div class="song-titles">
           <h2>${song.title}</h2>
-          <div class="song-artist-tag">Ca sĩ: ${song.artist} (${song.year})</div>
+          <div class="song-artist-tag">${song.artist} • Năm ${song.year}</div>
         </div>
         <div class="header-action-group">
           <button class="btn-secondary" onclick="toggleYouTubeVideo()">
-            <span id="yt-toggle-icon">▶️</span> <span id="yt-toggle-text">Xem MV Hát Mẫu</span>
+            <span id="yt-toggle-icon">▶️</span> <span id="yt-toggle-text">Xem MV Mẫu</span>
           </button>
           <button class="btn-secondary" onclick="switchNav('library')">
-            <span>📚</span> Chọn Bài Khác
+            <span>📚</span> Đổi Bài Khác
           </button>
         </div>
       </div>
 
       <div class="song-info-pills">
-        <div class="info-pill"><strong>Độ khó:</strong> ${song.difficulty}</div>
-        <div class="info-pill"><strong>Nhịp điệu:</strong> ${song.tempo}</div>
-        <div class="info-pill"><strong>Cảm xúc:</strong> ${song.theme}</div>
+        <span class="info-pill"><strong>Độ khó:</strong> ${song.difficulty}</span>
+        <span class="info-pill"><strong>Điệu:</strong> ${song.tempo}</span>
       </div>
 
       <!-- Container video YouTube ẩn hiện linh hoạt -->
@@ -290,7 +302,7 @@ function renderCurrentSong() {
         <div class="lyric-top-bar">
           <span class="line-number">Câu ${index + 1}</span>
           <button class="speak-line-btn" onclick="speakLine(${index}, '${escapeSingleQuotes(line.en)}')">
-            <span>🔊</span> Nghe Đọc Mẫu
+            <span>🔊</span> Nghe Đọc
           </button>
         </div>
 
@@ -310,7 +322,7 @@ function renderCurrentSong() {
         ${line.singingTip ? `
           <div class="lyric-tips-box">
             <span>💡</span>
-            <div><strong>Mẹo nối âm & nhả chữ:</strong> ${line.singingTip}</div>
+            <div><strong>Nối âm & nhả chữ:</strong> ${line.singingTip}</div>
           </div>
         ` : ''}
 
@@ -345,15 +357,13 @@ function renderCurrentSong() {
   if (vocabContainer) {
     vocabContainer.innerHTML = song.vocab.map(v => `
       <div class="vocab-card">
-        <div>
-          <div class="vocab-word-row">
-            <span class="vocab-word">${v.word}</span>
-            <span class="vocab-type">(${v.type})</span>
-          </div>
-          <div class="vocab-ipa">${v.ipa}</div>
-          <div class="vocab-vi">${v.vi}</div>
+        <div class="vocab-word-row">
+          <span class="vocab-word">${v.word}</span>
+          <span class="vocab-type">(${v.type})</span>
         </div>
-        <div class="vocab-tip">💡 <strong>Mẹo phát âm:</strong> ${v.tip}</div>
+        <div class="vocab-ipa">${v.ipa}</div>
+        <div class="vocab-vi">${v.vi}</div>
+        <div class="vocab-tip">💡 <strong>Mẹo:</strong> ${v.tip}</div>
       </div>
     `).join('');
   }
@@ -388,7 +398,7 @@ function toggleYouTubeVideo() {
     box.style.display = 'none';
     iframe.src = '';
     icon.textContent = '▶️';
-    text.textContent = 'Xem MV Hát Mẫu';
+    text.textContent = 'Xem MV Mẫu';
   }
 }
 
@@ -415,7 +425,7 @@ function renderGeneralGrammar() {
   container.innerHTML = GENERAL_GRAMMAR_GUIDE.map(item => `
     <article class="general-grammar-card">
       <h3>${item.topic}</h3>
-      <p class="general-grammar-desc">${item.desc}</p>
+      <p class="grammar-explanation">${item.desc}</p>
 
       <div class="sub-points-list">
         ${item.points.map(point => `
@@ -439,11 +449,11 @@ function renderGeneralGrammar() {
 }
 
 /* ==========================================================================
-   7. PHÒNG THU ÂM CỦA MẸ (VOICE RECORDER)
+   7. PHÒNG THU ÂM MOBILE (VOICE RECORDER)
    ========================================================================== */
 async function startRecording() {
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-    alert('Trình duyệt chưa cho phép ghi âm. Mẹ vui lòng mở trang trên trình duyệt Google Chrome hoặc Safari nhé!');
+    alert('Trình duyệt chưa cho phép ghi âm. Mẹ vui lòng mở trang trên Google Chrome hoặc Safari nhé!');
     return;
   }
 
@@ -467,19 +477,19 @@ async function startRecording() {
         audioPlayback.style.display = 'block';
       }
 
-      // Giải phóng microphone
+      // Giải phóng microphone phần cứng
       stream.getTracks().forEach(track => track.stop());
 
       document.getElementById('btn-play-record').disabled = false;
-      document.getElementById('record-status').textContent = 'Đã ghi âm xong! Mẹ hãy bấm "Nghe Lại Giọng Mẹ" bên dưới nhé 💖';
+      document.getElementById('record-status').textContent = 'Đã thu xong! Mẹ hãy bấm "Nghe Lại Giọng Mẹ" nhé 💖';
     };
 
     appState.mediaRecorder.start();
     appState.isRecording = true;
 
     // Cập nhật giao diện khi đang ghi âm
-    document.getElementById('mic-circle').classList.add('recording');
-    document.getElementById('record-status').textContent = 'Đang ghi âm giọng hát của Mẹ... Mẹ hãy hát thật tự tin nhé!';
+    document.getElementById('mic-halo').classList.add('recording');
+    document.getElementById('record-status').textContent = 'Đang thu âm giọng hát của Mẹ... Mẹ hãy hát thật tự tin nhé!';
     document.getElementById('btn-start-record').disabled = true;
     document.getElementById('btn-stop-record').disabled = false;
     document.getElementById('btn-play-record').disabled = true;
@@ -504,7 +514,7 @@ function stopRecording() {
     appState.isRecording = false;
 
     clearInterval(appState.recordInterval);
-    document.getElementById('mic-circle').classList.remove('recording');
+    document.getElementById('mic-halo').classList.remove('recording');
     document.getElementById('btn-start-record').disabled = false;
     document.getElementById('btn-stop-record').disabled = true;
   }
